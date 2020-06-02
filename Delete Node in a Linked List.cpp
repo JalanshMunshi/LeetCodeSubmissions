@@ -8,15 +8,22 @@
  */
 class Solution {
 public:
+    // Better submission
     void deleteNode(ListNode* node) {
         
-        ListNode* prev = node;
-        while(node->next)
-        {
-            node->val = node->next->val;
-            prev = node;
-            node = node->next;
-        }
-        prev->next = NULL;
+        node->val = node->next->val;
+        node->next = node->next->next;
     }
+    
+    // void deleteNode(ListNode* node) {
+        
+    //     ListNode* prev = node;
+    //     while(node->next)
+    //     {
+    //         node->val = node->next->val;
+    //         prev = node;
+    //         node = node->next;
+    //     }
+    //     prev->next = NULL;
+    // }
 };
