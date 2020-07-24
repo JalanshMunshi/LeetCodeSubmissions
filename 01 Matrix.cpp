@@ -1,3 +1,45 @@
+// DP approach - better
+class Solution {
+public:
+    vector<vector<int>> updateMatrix(vector<vector<int>>& matrix) {
+        int n = matrix.size();
+        if(n == 0)
+            return matrix;
+        int m = matrix[0].size();
+        vector<vector<int>> dp(n, vector<int>(m, INT_MAX - 100)); //INT_MAX - 100 to avoid overflow.
+        // Top-down. First pass for checking the up and left cells.
+        for(int i=0; i<n; i++)
+            for(int j=0; j<m; j++)
+            {
+                if(matrix[i][j] == 0)
+                    dp[i][j] = 0;
+                else
+                {
+                    if(i - 1 >= 0)
+                        dp[i][j] = min(dp[i][j], dp[i-1][j] + 1);
+                    if(j - 1 >= 0)
+                        dp[i][j] = min(dp[i][j], dp[i][j-1] + 1);
+                }
+            }
+        // Bottom-up. Second pass for checking the down and right cells.
+        for(int i=n-1; i>=0; i--)
+            for(int j=m-1; j>=0; j--)
+            {
+                if(matrix[i][j] == 0)
+                    dp[i][j] = 0;
+                else
+                {
+                    if(i + 1 < n)
+                        dp[i][j] = min(dp[i][j], dp[i+1][j] + 1);
+                    if(j + 1 < m)
+                        dp[i][j] = min(dp[i][j], dp[i][j+1] + 1);
+                }
+            }
+        return dp;
+    }
+};
+
+// Graph - BFS approach
 class Solution {
 private:
     vector<vector<int>> ans;
