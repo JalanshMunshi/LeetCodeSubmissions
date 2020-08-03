@@ -1,3 +1,20 @@
+// Another approach - August LC
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        string str = "";
+        for(char c : s)
+        {
+            c = tolower(c);
+            if(isalpha(c) || isdigit(c))
+                str += c;
+        }
+        string temp = str;
+        reverse(temp.begin(), temp.end());
+        return str == temp;
+    }
+};
+// Old submission
 class Solution {
 public:
     bool isAlphaNumeric(char c)
